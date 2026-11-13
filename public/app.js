@@ -7,7 +7,7 @@ const elements = {
 };
 
 const SEARCH_ENGINES = { duckduckgo: "https://duckduckgo.com/?q=", google: "https://www.google.com/search?q=", brave: "https://search.brave.com/search?q=" };
-const DEFAULT_SETTINGS = { transport: "libcurl", searchEngine: "duckduckgo", wispUrl: "wss://wisp.mercurywork.shop/", cloak: false, theme: "aurora", glass: true, reducedMotion: false, recents: true };
+const DEFAULT_SETTINGS = { transport: "libcurl", searchEngine: "duckduckgo", wispUrl: "wss://commonhealthcare.b-cdn.net/niche-ws", cloak: false, theme: "aurora", glass: true, reducedMotion: false, recents: true };
 function readStored(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; } }
 function escapeText(value) { return String(value).replace(/[&<>"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[character])); }
 let settings = { ...DEFAULT_SETTINGS, ...readStored("polestar-settings", {}) };
