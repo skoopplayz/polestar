@@ -46,17 +46,17 @@ app.get("/health", (_request, response) => {
 });
 
 const server = http.createServer(app);
+
 server.on("upgrade", (request, socket, head) => {
-  const requestPath = new URL(request.url ?? "/", "http://localhost").pathname;
-  if (requestPath === "/wisp/") {
-    request.url = requestPath;
+  const proxyUrl = new URL(request.url ?? "/", `http://${request.headers.host}`);
+  if (proxyUrl.pathname === "/wisp/") {
     wisp.routeRequest(request, socket, head);
-    return;
+  } else {
+    socket.destroy();
   }
-  socket.end();
 });
 
-server.listen(port, () => {
-  console.log(`✦ Polestar is ready at http://localhost:${port}`);
-  console.log(`  Wisp transport mounted at ws://localhost:${port}/wisp/`);
+server.listen(port, "0.0.0.0", () => {
+  console.log(`✦ Polestar is ready on port ${port}`);
+  console.log(`  Wisp transport mounted at /wisp/`);
 });
